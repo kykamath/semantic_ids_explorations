@@ -1,2 +1,5 @@
 torch
 torchvision
+pandas
+datasets
+sentence-transformers
