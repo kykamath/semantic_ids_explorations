@@ -7,7 +7,7 @@ def get_movie_embeddings():
     print("Loading MovieLens 100k dataset...")
     # Load the MovieLens 100k dataset from the official source
     # dataset = load_dataset("movielens", "100k")
-    dataset = load_dataset("reczoo/Movielens1M_m1")
+    dataset = load_dataset("ashraq/movielens_ratings")
 
     # The 'movielens' dataset contains ratings, and movie titles are repeated.
     # We need to get the unique movie titles from the 'movie_title' feature.
