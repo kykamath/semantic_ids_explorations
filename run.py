@@ -1,20 +1,20 @@
 import torch
-import pandas as pd
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 
 
 def get_movie_embeddings():
     print("Loading MovieLens 100k dataset...")
-    # Load the MovieLens 100k dataset
-    dataset = load_dataset("mcprado/movielens_100k")
+    # Load the MovieLens 100k dataset from the official source
+    # dataset = load_dataset("movielens", "100k")
+    dataset = load_dataset("reczoo/Movielens1M_m1")
 
-    # Extract movie titles from the 'items' split
-    # The dataset structure might vary, assuming 'title' is the relevant column in 'items'
-    movies_df = pd.DataFrame(dataset['items'])
-    movie_titles = movies_df['title'].tolist()
+    # The 'movielens' dataset contains ratings, and movie titles are repeated.
+    # We need to get the unique movie titles from the 'movie_title' feature.
+    # The 'train' split contains all the data.
+    movie_titles = sorted(list(set(item['movie_title'] for item in dataset['train'])))
 
-    print(f"Loaded {len(movie_titles)} movie titles.")
+    print(f"Loaded {len(movie_titles)} unique movie titles.")
 
     # Load a pre-trained sentence transformer model
     print("Loading SentenceTransformer model...")
